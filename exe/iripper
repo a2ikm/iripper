@@ -35,17 +35,19 @@ end
 
 default = ARGV[0] ? ARGV[0].strip : nil
 
-case default
-when "help"
-  show_help
-  exit
-when "version"
-  show_version
-  exit
-end
-
-if warn_unknown_ripper_command(default)
-  default = nil
+if default
+  case default
+  when "help"
+    show_help
+    exit
+  when "version"
+    show_version
+    exit
+  else
+    if warn_unknown_ripper_command(default)
+      default = nil
+    end
+  end
 end
 
 loop do
