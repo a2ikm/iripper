@@ -4,15 +4,23 @@ require "pp"
 require "ripper"
 require "ripper/repl"
 
+default = ARGV[0]
+
 loop do
   print "ripper> "
+
   begin
     line = $stdin.gets.chomp
   rescue NoMethodError, Interrupt
     exit
   end
 
-  cmd, src = line.split(/[[:space:]]/, 2)
+  if default
+    cmd, src = default, line
+  else
+    cmd, src = line.split(/[[:space:]]/, 2)
+  end
+
   case cmd
   when "lex"
     pp Ripper.lex(src)
