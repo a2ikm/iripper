@@ -5,17 +5,16 @@ require "ripper"
 require "iripper"
 
 DELIM_RE = /[[:space:]]+/
+BLANK_RE = /\A[[:space:]]*\z/
 
-default = ARGV[0]
-
-if default
-  prompt = "iripper(#{default})> "
-else
-  prompt = "iripper> "
-end
+default = ARGV[0] ? ARGV[0].strip : nil
 
 loop do
-  print prompt
+  if default
+    print "iripper(#{default})> "
+  else
+    print "iripper> "
+  end
 
   begin
     line = $stdin.gets.chomp
@@ -25,6 +24,13 @@ loop do
 
   cmd, src = line.split(DELIM_RE, 2)
   case cmd
+  when "default"
+    if BLANK_RE.match?(src)
+      default = nil
+    else
+      default = src.strip
+    end
+    next
   when "help"
     puts "TODO: Show help"
     next
