@@ -1,8 +1,6 @@
 # IRipper
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/iripper`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+IRipper is a REPL to parse a Ruby script interactively.
 
 ## Installation
 
@@ -22,7 +20,31 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Run `iripper` command, then enter parsing commands and scripts.
+
+```
+$ iripper
+iripper> tokenize 1 + 1
+["1", " ", "+", " ", "1"]
+iripper> sexp 1 + 1
+[:program, [[:binary, [:@int, "1", [1, 0]], :+, [:@int, "1", [1, 4]]]]]
+```
+
+Available parsing commands are `lex`, `parse`, `sexp`, `tokenize`.
+
+You can specify the default command via the booting argument, or `default` command. Also it can be canceled.
+
+```
+$ iripper tokenize
+iripper(tokenize)> 1 + 1
+["1", " ", "+", " ", "1"]
+iripper(tokenize)> default sexp
+iripper(sexp)> 1 + 1
+[:program, [[:binary, [:@int, "1", [1, 0]], :+, [:@int, "1", [1, 4]]]]]
+iripper(sexp)> default
+iripper> tokenize 1 + 1
+["1", " ", "+", " ", "1"]
+```
 
 ## Development
 
