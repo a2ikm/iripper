@@ -7,7 +7,24 @@ require "iripper"
 DELIM_RE = /[[:space:]]+/
 BLANK_RE = /\A[[:space:]]*\z/
 
+def show_version
+  puts IRipper::VERSION
+end
+
+def show_help
+  puts "TODO: Show help"
+end
+
 default = ARGV[0] ? ARGV[0].strip : nil
+
+case default
+when "help"
+  show_help
+  exit
+when "version"
+  show_version
+  exit
+end
 
 loop do
   if default
@@ -32,10 +49,10 @@ loop do
     end
     next
   when "help"
-    puts "TODO: Show help"
+    show_help
     next
   when "version"
-    puts IRipper::VERSION
+    show_version
     next
   when "exit", "quit"
     exit
