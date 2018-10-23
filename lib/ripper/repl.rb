@@ -1,6 +1,6 @@
 require "ripper/repl/version"
 
-module Ripper
+class Ripper
   module Repl
     # Your code goes here...
   end

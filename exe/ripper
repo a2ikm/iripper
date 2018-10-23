@@ -2,6 +2,7 @@
 
 require "pp"
 require "ripper"
+require "ripper/repl"
 
 loop do
   print "ripper> "
@@ -11,7 +12,21 @@ loop do
     exit
   end
 
-  pp Ripper.sexp(line)
-
-  warn "Use Ctrl-D (i.e. EOF) to exit" if line =~ /^(exit|quit)$/
+  cmd, src = line.split(/[[:space:]]/, 2)
+  case cmd
+  when "lex"
+    pp Ripper.lex(src)
+  when "parse"
+    pp Ripper.parse(src)
+  when "sexp"
+    pp Ripper.sexp(src)
+  when "tokenize"
+    pp Ripper.tokenize(src)
+  when "version"
+    puts Ripper::Repl::VERSION
+  when "exit", "quit"
+    exit
+  else
+    puts "TODO: Show help"
+  end
 end
