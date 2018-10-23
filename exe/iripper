@@ -84,6 +84,8 @@ loop do
     next
   when "exit", "quit"
     exit
+  when nil, BLANK_RE
+    next
   end
 
   if default
