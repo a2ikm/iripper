@@ -30,7 +30,7 @@ iripper> sexp 1 + 1
 [:program, [[:binary, [:@int, "1", [1, 0]], :+, [:@int, "1", [1, 4]]]]]
 ```
 
-Available parsing commands are `lex`, `parse`, `sexp`, `tokenize`.
+Available parsing commands are `lex`, `sexp`, `tokenize`.
 
 You can specify the default command via the booting argument, or `default` command. Also it can be canceled.
 

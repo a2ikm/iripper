@@ -15,7 +15,7 @@ def show_help
   puts "TODO: Show help"
 end
 
-RIPPER_COMMANDS = %w(lex parse sexp tokenize).freeze
+RIPPER_COMMANDS = %w(lex sexp tokenize).freeze
 
 def ripper_command?(cmd)
   RIPPER_COMMANDS.include?(cmd)
