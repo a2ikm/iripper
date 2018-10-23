@@ -2,14 +2,14 @@
 
 require "pp"
 require "ripper"
-require "ripper/repl"
+require "iripper"
 
 default = ARGV[0]
 
 if default
-  prompt = "ripper(#{default})> "
+  prompt = "iripper(#{default})> "
 else
-  prompt = "ripper> "
+  prompt = "iripper> "
 end
 
 loop do
@@ -37,7 +37,7 @@ loop do
   when "tokenize"
     pp Ripper.tokenize(src)
   when "version"
-    puts Ripper::Repl::VERSION
+    puts IRipper::VERSION
   when "exit", "quit"
     exit
   else
