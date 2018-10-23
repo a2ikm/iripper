@@ -6,8 +6,14 @@ require "ripper/repl"
 
 default = ARGV[0]
 
+if default
+  prompt = "ripper(#{default})> "
+else
+  prompt = "ripper> "
+end
+
 loop do
-  print "ripper> "
+  print prompt
 
   begin
     line = $stdin.gets.chomp
