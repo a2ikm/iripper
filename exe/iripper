@@ -48,13 +48,17 @@ loop do
   case cmd
   when "lex"
     pp Ripper.lex(src)
+    next
   when "parse"
     pp Ripper.parse(src)
+    next
   when "sexp"
     pp Ripper.sexp(src)
+    next
   when "tokenize"
     pp Ripper.tokenize(src)
-  else
-    warn "unknown command: #{cmd}"
+    next
   end
+
+  warn "unknown command: #{cmd}"
 end
