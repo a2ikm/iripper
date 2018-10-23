@@ -28,6 +28,12 @@ iripper> tokenize 1 + 1
 ["1", " ", "+", " ", "1"]
 iripper> sexp 1 + 1
 [:program, [[:binary, [:@int, "1", [1, 0]], :+, [:@int, "1", [1, 4]]]]]
+iripper> lex 1 + 1
+[[[1, 0], :on_int, "1", EXPR_END|EXPR_ENDARG],
+ [[1, 1], :on_sp, " ", EXPR_END|EXPR_ENDARG],
+ [[1, 2], :on_op, "+", EXPR_BEG],
+ [[1, 3], :on_sp, " ", EXPR_BEG],
+ [[1, 4], :on_int, "1", EXPR_END|EXPR_ENDARG]]
 ```
 
 Available parsing commands are `lex`, `sexp`, `tokenize`.
