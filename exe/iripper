@@ -88,20 +88,10 @@ loop do
     cmd, src = default, line
   end
 
-  case cmd
-  when "lex"
-    pp Ripper.lex(src)
-    next
-  when "parse"
-    pp Ripper.parse(src)
-    next
-  when "sexp"
-    pp Ripper.sexp(src)
-    next
-  when "tokenize"
-    pp Ripper.tokenize(src)
+  if ripper_command?(cmd)
+    pp Ripper.send(cmd, src)
     next
   end
 
-  warn "unknown command: #{cmd}"
+  warn "Unknown command: #{cmd}."
 end
