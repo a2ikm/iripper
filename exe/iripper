@@ -4,6 +4,8 @@ require "pp"
 require "ripper"
 require "iripper"
 
+DELIM_RE = /[[:space:]]+/
+
 default = ARGV[0]
 
 if default
@@ -21,10 +23,20 @@ loop do
     exit
   end
 
+  cmd, src = line.split(DELIM_RE, 2)
+  case cmd
+  when "help"
+    puts "TODO: Show help"
+    next
+  when "version"
+    puts IRipper::VERSION
+    next
+  when "exit", "quit"
+    exit
+  end
+
   if default
     cmd, src = default, line
-  else
-    cmd, src = line.split(/[[:space:]]/, 2)
   end
 
   case cmd
@@ -36,11 +48,7 @@ loop do
     pp Ripper.sexp(src)
   when "tokenize"
     pp Ripper.tokenize(src)
-  when "version"
-    puts IRipper::VERSION
-  when "exit", "quit"
-    exit
   else
-    puts "TODO: Show help"
+    warn "unknown command: #{cmd}"
   end
 end
