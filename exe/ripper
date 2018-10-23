@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+
+require "pp"
+require "ripper"
+
+loop do
+  print "ripper> "
+  begin
+    line = $stdin.gets.chomp
+  rescue NoMethodError, Interrupt
+    exit
+  end
+
+  pp Ripper.sexp(line)
+
+  warn "Use Ctrl-D (i.e. EOF) to exit" if line =~ /^(exit|quit)$/
+end
