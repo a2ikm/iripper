@@ -15,6 +15,24 @@ def show_help
   puts "TODO: Show help"
 end
 
+RIPPER_COMMANDS = %w(lex parse sexp tokenize).freeze
+
+def ripper_command?(cmd)
+  RIPPER_COMMANDS.include?(cmd)
+end
+
+def warn_unknown_ripper_command(cmd)
+  if ripper_command?(cmd)
+    false
+  else
+    warn <<-TEXT
+Unknown ripper command `#{cmd}`. Available ripper commands are #{RIPPER_COMMANDS.join(", ")}.
+    TEXT
+
+    true
+  end
+end
+
 default = ARGV[0] ? ARGV[0].strip : nil
 
 case default
@@ -24,6 +42,10 @@ when "help"
 when "version"
   show_version
   exit
+end
+
+if warn_unknown_ripper_command(default)
+  default = nil
 end
 
 loop do
@@ -42,10 +64,14 @@ loop do
   cmd, src = line.split(DELIM_RE, 2)
   case cmd
   when "default"
-    if BLANK_RE.match?(src)
+    if src.nil? || BLANK_RE.match?(src)
       default = nil
     else
-      default = src.strip
+      src.strip!
+      if warn_unknown_ripper_command(src)
+        next
+      end
+      default = src
     end
     next
   when "help"
