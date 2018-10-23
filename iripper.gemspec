@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Masato Ikeda"]
   spec.email         = ["masato.ikeda@gmail.com"]
 
-  spec.summary       = %q{Read, Parse, Print, Loop.}
+  spec.summary       = %q{IRipper is a REPL to parse a Ruby script interactively.}
   spec.homepage      = "https://github.com/a2ikm/iripper"
 
   spec.files         = Dir.chdir(File.expand_path('..', __FILE__)) do

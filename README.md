@@ -20,7 +20,7 @@ Or install it yourself as:
 
 ## Usage
 
-Run `iripper` command, then enter parsing commands and scripts.
+Run `iripper` command, then enter a parsing command and scripts.
 
 ```
 $ iripper
